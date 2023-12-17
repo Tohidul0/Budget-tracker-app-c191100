@@ -30,9 +30,7 @@ function calculateIncome() {
 }
 calculateIncome();
 
-/**
- * Task 1: Calculate total expense
- */
+// totalExpence start here-------------------------------------------------------------------------------
 function calculateExpense() {
   let summe = 0;
   for (let item of expenseList.children) {
@@ -47,6 +45,7 @@ function calculateExpense() {
   totalExpence.innerHTML = formatMoney(summe);
 
 }
+// totalExpense finished here--------------------------------------------------------------------------
 
 /**
  * Task 2: Calculate the budget
@@ -103,6 +102,10 @@ function addEntry() {
 
   // update total income value
   calculateIncome();
+
+  /**
+ * Task 1: Calculate total expense-------------------done-------
+ */
   calculateExpense()
 }
 
