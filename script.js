@@ -36,12 +36,14 @@ calculateIncome();
 function calculateExpense() {
   let summe = 0;
   for (let item of expenseList.children) {
-    const valueString =
+    const valueStringEx =
       item.children[0].children[1].children[0].innerHTML.replace(/,/g, "");
+   //console.log(valueStringEx)
+    //console.log(parseFloat(valueStringEx));
+    summe += parseFloat(valueStringEx);
 
-    console.log(parseFloat(valueString));
-    summe += parseFloat(valueString);
   }
+  console.log(summe)
   totalExpence.innerHTML = formatMoney(summe);
 
 }
