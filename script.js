@@ -11,12 +11,19 @@ const totalIncome = document.getElementById("total-income");
 // -----------------total expense add---
 const totalExpence = document.getElementById('total-expence')
 
+//------available amount add------------------
+const availableBudget = document.getElementById('available-amount')
+
+// global variable;
+let income;
+let cost;
+
 function formatMoney(value) {
   return Math.abs(Number(value)).toLocaleString(undefined, {
     minimumFractionDigits: 2,
   });
 }
-
+//totalIncome start here-----------------------------------------------------------
 function calculateIncome() {
   let sum = 0;
   for (let item of incomeList.children) {
@@ -26,9 +33,15 @@ function calculateIncome() {
     console.log(parseFloat(valueString));
     sum += parseFloat(valueString);
   }
+  income=sum;
   totalIncome.innerHTML = formatMoney(sum);
 }
-calculateIncome();
+//totalIncome finished here----------------------------------------------------------------
+//calculateIncome();
+
+
+
+
 
 // totalExpence start here-------------------------------------------------------------------------------
 function calculateExpense() {
@@ -42,16 +55,26 @@ function calculateExpense() {
 
   }
   console.log(summe)
+  cost=Math.abs(summe);
+ 
   totalExpence.innerHTML = formatMoney(summe);
 
 }
 // totalExpense finished here--------------------------------------------------------------------------
 
-/**
- * Task 2: Calculate the budget
- */
 
-function calculateBudget() {}
+
+
+// avaiable budget start here------------------------------------------------------------------
+function calculateBudget(){
+  console.log(cost);
+  console.log(income);
+  const totalbudget=income-cost;
+  availableBudget.innerHTML=formatMoney(totalbudget);
+
+}
+
+
 
 /**
  * Task 3: Delete Entry
@@ -106,7 +129,13 @@ function addEntry() {
   /**
  * Task 1: Calculate total expense-------------------done-------
  */
-  calculateExpense()
+  calculateExpense();
+
+  /**
+ * Task 2: Calculate the budget-------------------------done---------
+ */
+ calculateBudget() ;
+  
 }
 
 addExpenseButton.addEventListener("click", addEntry);
