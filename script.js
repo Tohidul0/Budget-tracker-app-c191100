@@ -17,6 +17,9 @@ const availableBudget = document.getElementById('available-amount')
 // global variable;
 let income;
 let cost;
+let storeData={};
+let id = 0;
+let lii;
 
 function formatMoney(value) {
   return Math.abs(Number(value)).toLocaleString(undefined, {
@@ -79,7 +82,23 @@ function calculateBudget(){
 /**
  * Task 3: Delete Entry
  */
-function deleteEntry() {}
+function deleteEntry( id, val) {
+  localStorage.setItem(id, val);
+  income=income-val;
+  //console.log(income)
+  //calculateIncome();
+  totalIncome.innerHTML = formatMoney(income);
+
+  let g;
+  g="delete" + id;
+  console.log(g);
+  const deleteHtml= document.getElementById(g)
+  deleteHtml.style.display="none";
+
+  // const newEntryHtml1=` document.getElementById("delete${id}").style.display: "none"`
+  // lii.innerHTML += newEntryHtml1;
+ 
+}
 
 function addEntry() {
   const type = selectInput.value;
@@ -101,20 +120,33 @@ function addEntry() {
 
   // insert entry
   const list = type === "income" ? incomeList : expenseList;
+  lii=list
   const sign = type === "income" ? "+" : "-";
   const colorClass = type === "income" ? "text-green-600" : "text-red-600";
+ 
+  // if(type === "income"){
+  //   id=id+1;
+  // }
+  // else{
+  //   id+2;
+  // }
 
+  id++;
+ 
+ 
   const newEntryHtml = `
-    <li class="py-2.5">
+    <li class="py-2.5" id="delete${id}" >
       <div class="group flex justify-between gap-2 text-sm">
         <span>${description}</span>
         <div>
           <span class="${colorClass}">${sign}${formatMoney(value)}</span>
           <span
             class="ml-2 hidden cursor-pointer font-medium text-red-500 group-hover:inline-block"
+            onclick="deleteEntry(id, ${value})"
           >
             Delete
           </span>
+          console.log("delete${id})
         </div>
       </div>
     </li>
