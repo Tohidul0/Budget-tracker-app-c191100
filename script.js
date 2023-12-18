@@ -92,10 +92,10 @@ function deleteEntry( id, val, si) {
   console.log(si);
   
   if(si==='+'){
-    cost=cost-val;
+    income=income-val;
     //console.log(income)
     //calculateIncome();
-    totalIncome.innerHTML = formatMoney(cost);
+    totalIncome.innerHTML = formatMoney(income);
     console.log(id, val);
     let g;
     g="delete"+id;
@@ -114,10 +114,10 @@ function deleteEntry( id, val, si) {
     availableBudget.innerHTML=formatMoney(totalbudget);
   }
   else{
-    income=income-val;
+    cost=cost-val;
     //console.log(income)
     //calculateIncome();
-    totalExpence.innerHTML = formatMoney(income);
+    totalExpence.innerHTML = formatMoney(cost);
     console.log(id, val);
     let g;
     g="delete"+id;
