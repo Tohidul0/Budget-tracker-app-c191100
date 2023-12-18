@@ -15,11 +15,13 @@ const totalExpence = document.getElementById('total-expence')
 const availableBudget = document.getElementById('available-amount')
 
 // global variable;
+let newEntryHtml;
 let income;
 let cost;
 let storeData={};
 let id = 0;
 let lii;
+let m=0;
 
 function formatMoney(value) {
   return Math.abs(Number(value)).toLocaleString(undefined, {
@@ -88,15 +90,16 @@ function deleteEntry( id, val) {
   //console.log(income)
   //calculateIncome();
   totalIncome.innerHTML = formatMoney(income);
-
+  console.log(id, val);
   let g;
-  g="delete" + id;
+  g="delete"+id;
   console.log(g);
   const deleteHtml= document.getElementById(g)
   deleteHtml.style.display="none";
 
   // const newEntryHtml1=` document.getElementById("delete${id}").style.display: "none"`
   // lii.innerHTML += newEntryHtml1;
+ 
  
 }
 
@@ -133,8 +136,8 @@ function addEntry() {
 
   id++;
  
- 
-  const newEntryHtml = `
+   m=0;
+   newEntryHtml = `
     <li class="py-2.5" id="delete${id}" >
       <div class="group flex justify-between gap-2 text-sm">
         <span>${description}</span>
@@ -142,17 +145,20 @@ function addEntry() {
           <span class="${colorClass}">${sign}${formatMoney(value)}</span>
           <span
             class="ml-2 hidden cursor-pointer font-medium text-red-500 group-hover:inline-block"
-            onclick="deleteEntry(id, ${value})"
+            onclick="deleteEntry(${id}, ${value})"
           >
             Delete
           </span>
-          console.log("delete${id})
+         
         </div>
       </div>
     </li>
     `;
 
   // Approach 1:
+  if(m>0){
+    newEntryHtml='';
+  }
   list.innerHTML += newEntryHtml;
 
   // update total income value
