@@ -18,16 +18,19 @@ const availableBudget = document.getElementById('available-amount')
 let newEntryHtml;
 let income;
 let cost;
-let storeData={};
+//let storeData={};
 let id = 0;
 let lii;
 let m=0;
+let totalbudget;
 
 function formatMoney(value) {
   return Math.abs(Number(value)).toLocaleString(undefined, {
     minimumFractionDigits: 2,
   });
 }
+
+
 //totalIncome start here-----------------------------------------------------------
 function calculateIncome() {
   let sum = 0;
@@ -74,7 +77,7 @@ function calculateExpense() {
 function calculateBudget(){
   console.log(cost);
   console.log(income);
-  const totalbudget=income-cost;
+  totalbudget=income-cost;
   availableBudget.innerHTML=formatMoney(totalbudget);
 
 }
@@ -82,23 +85,57 @@ function calculateBudget(){
 
 
 /**
- * Task 3: Delete Entry
+ * Task 3: Delete Entry------------------------------------------------------
  */
-function deleteEntry( id, val) {
+function deleteEntry( id, val, si) {
   localStorage.setItem(id, val);
-  income=income-val;
-  //console.log(income)
-  //calculateIncome();
-  totalIncome.innerHTML = formatMoney(income);
-  console.log(id, val);
-  let g;
-  g="delete"+id;
-  console.log(g);
-  const deleteHtml= document.getElementById(g)
-  deleteHtml.style.display="none";
-
-  // const newEntryHtml1=` document.getElementById("delete${id}").style.display: "none"`
-  // lii.innerHTML += newEntryHtml1;
+  console.log(si);
+  
+  if(si==='+'){
+    cost=cost-val;
+    //console.log(income)
+    //calculateIncome();
+    totalIncome.innerHTML = formatMoney(cost);
+    console.log(id, val);
+    let g;
+    g="delete"+id;
+    console.log(g);
+    const deleteHtml= document.getElementById(g)
+    deleteHtml.style.display="none";
+  
+  
+  
+    // const newEntryHtml1=` document.getElementById("delete${id}").style.display: "none"`
+    // lii.innerHTML += newEntryHtml1;
+  
+  
+  
+    totalbudget = totalbudget-val;
+    availableBudget.innerHTML=formatMoney(totalbudget);
+  }
+  else{
+    income=income-val;
+    //console.log(income)
+    //calculateIncome();
+    totalExpence.innerHTML = formatMoney(income);
+    console.log(id, val);
+    let g;
+    g="delete"+id;
+    console.log(g);
+    const deleteHtml= document.getElementById(g)
+    deleteHtml.style.display="none";
+  
+  
+  
+    // const newEntryHtml1=` document.getElementById("delete${id}").style.display: "none"`
+    // lii.innerHTML += newEntryHtml1;
+  
+  
+  
+    totalbudget = totalbudget+val;
+    availableBudget.innerHTML=formatMoney(totalbudget);
+  }
+  
  
  
 }
@@ -145,7 +182,7 @@ function addEntry() {
           <span class="${colorClass}">${sign}${formatMoney(value)}</span>
           <span
             class="ml-2 hidden cursor-pointer font-medium text-red-500 group-hover:inline-block"
-            onclick="deleteEntry(${id}, ${value})"
+            onclick="deleteEntry(${id}, ${value}, '${sign}')"
           >
             Delete
           </span>
